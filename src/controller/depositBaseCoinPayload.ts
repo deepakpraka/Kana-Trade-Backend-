@@ -1,5 +1,3 @@
-// getRegisteredMarkets.ts
-
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { AptosAccount, AptosClient } from 'aptos';
 import { EconiaMarkets, EconiaTrade, ENVIRONMENT } from '@kanalabs/trade';
@@ -19,7 +17,6 @@ export default async function depositBaseCoinPayload(fastify: FastifyInstance) {
       reply: FastifyReply
     ) {
       try {
-        // Use AptosAccount.fromAptosAccountObject to create the account
         const account = AptosAccount.fromAptosAccountObject({
           address: process.env.APTOS_ADDRESS,
           publicKeyHex: process.env.APTOS_PUBLICKEY,
@@ -40,9 +37,9 @@ export default async function depositBaseCoinPayload(fastify: FastifyInstance) {
 
         const registeredMarkets = await econia.fetchRegisteredMarkets(environment);
         const marketData: EconiaMarkets = await econia.markets(
-            registeredMarkets.filter((market) => market.marketId == 3)[0],
+          registeredMarkets.filter((market) => market.marketId == 3)[0],
           environment
-          );
+        );
         const depositPayload = marketData.depositBaseCoinPayload('100000');
         const depositTransaction = await client.generateTransaction(account.address(), depositPayload);
         const depositSign = await client.signTransaction(account, depositTransaction);
@@ -55,7 +52,7 @@ export default async function depositBaseCoinPayload(fastify: FastifyInstance) {
         reply.code(200).send({
           status: 200,
           message: 'Deposit base coin payload submitted successfully',
-          depositPayload, // Include depositPayload in the response
+          depositPayload,
         });
       } catch (error: any) {
         reply.code(500).send({

@@ -44,7 +44,7 @@ export default async function marketOrderHistory(fastify: FastifyInstance) {
                   const orderHistoryMarket = await marketData.getOrderHistory(account.address().toString(),'market')
                   reply.code(200).send({
                     status: 200,
-                    message: 'Fetch Limit Order Successfully',
+                    message: 'Fetch Market Order History Successfully',
                     orderHistoryMarket,
                 });
             } catch (error: any) {

@@ -17,7 +17,7 @@ export default async function getUserMarketAccount(fastify: FastifyInstance) {
       reply: FastifyReply
     ) {
       try {
-        // Use AptosAccount.fromAptosAccountObject to create the account
+
         const account = AptosAccount.fromAptosAccountObject({
           address: process.env.APTOS_ADDRESS,
           publicKeyHex: process.env.APTOS_PUBLICKEY,
@@ -40,16 +40,16 @@ export default async function getUserMarketAccount(fastify: FastifyInstance) {
         const marketData = await econia.markets(registeredMarkets[1], environment);
         const marketInfo = await marketData.getUserMarketAccount(account.address().toString());
         reply.code(200).send({
-            status: 200,
-            message: ' Fetch User Account Market Info successfully',
-            marketInfo, 
-          });
-        } catch (error: any) {
-          reply.code(500).send({
-            status: 500,
-            error: error.message,
-          });
-        }
+          status: 200,
+          message: ' Fetch User Account Market Info successfully',
+          marketInfo,
+        });
+      } catch (error: any) {
+        reply.code(500).send({
+          status: 500,
+          error: error.message,
+        });
       }
-    );
-  }
+    }
+  );
+}

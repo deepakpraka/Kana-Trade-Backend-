@@ -52,7 +52,7 @@ export default async function placeLimitSellOrder(fastify: FastifyInstance) {
                 const openOrders = await marketData.getOpenOrders(account.address().toString(), 'open');
                 reply.code(200).send({
                     status: 200,
-                    message: 'Place Market Sell Order payload submitted successfully',
+                    message: 'Place Limit Sell Order payload submitted successfully',
                     buyOrderPayload,
                 });
             } catch (error: any) {

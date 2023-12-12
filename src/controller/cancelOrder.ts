@@ -39,8 +39,8 @@ export default async function cancelOrder(fastify: FastifyInstance) {
                 const registeredMarkets = await econia.fetchRegisteredMarkets(environment);
                 const marketData: EconiaMarkets = await econia.markets(
                     registeredMarkets.filter((market) => market.marketId == 3)[0],
-                  environment
-                  );
+                    environment
+                );
                 const openOrders = await marketData.getOpenOrders(account.address().toString(), 'open');
                 const cancel = openOrders.bids[0];
                 const closeOrder = marketData.cancelOrder(BUY, cancel.marketOrderId.toBigInt().toString());
@@ -49,7 +49,7 @@ export default async function cancelOrder(fastify: FastifyInstance) {
                 const submit = await client.submitTransaction(sign);
                 reply.code(200).send({
                     status: 200,
-                    message: 'Close Order verified successfully',
+                    message: '  Fetch Close Order  successfully',
                     closeOrder,
                 });
             } catch (error: any) {

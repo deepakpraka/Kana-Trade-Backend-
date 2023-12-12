@@ -1,5 +1,3 @@
-// getRegisteredMarkets.ts
-
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { AptosAccount, AptosClient } from 'aptos';
 import { EconiaMarkets, EconiaTrade, ENVIRONMENT } from '@kanalabs/trade';
@@ -19,7 +17,6 @@ export default async function depositQuoteCoinPayload(fastify: FastifyInstance) 
       reply: FastifyReply
     ) {
       try {
-        // Use AptosAccount.fromAptosAccountObject to create the account
         const account = AptosAccount.fromAptosAccountObject({
           address: process.env.APTOS_ADDRESS,
           publicKeyHex: process.env.APTOS_PUBLICKEY,

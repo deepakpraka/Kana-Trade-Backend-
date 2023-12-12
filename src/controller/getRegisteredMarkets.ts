@@ -19,7 +19,7 @@ export default async function getRegisteredMarkets(fastify: FastifyInstance) {
       try {
         const environment = request.query.environment;
 
-      
+
         if (!environment) {
           return reply.code(400).send({
             status: 400,
@@ -34,11 +34,11 @@ export default async function getRegisteredMarkets(fastify: FastifyInstance) {
 
         reply.code(200).send({
           status: 200,
-          message: 'Fetch registered markets successfully',
+          message: 'Fetch Registered Markets successfully',
           registeredMarkets,
         });
       } catch (error: any) {
-   
+
         reply.code(500).send({
           status: 500,
           error: error.message,

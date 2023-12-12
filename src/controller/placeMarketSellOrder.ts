@@ -1,5 +1,3 @@
-
-
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { AptosAccount, AptosClient } from 'aptos';
 import {  EconiaMarkets, EconiaTrade, ENVIRONMENT, SELL } from '@kanalabs/trade';

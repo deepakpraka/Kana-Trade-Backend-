@@ -1,4 +1,3 @@
-
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { AptosAccount, AptosClient } from 'aptos';
 import { BUY, EconiaMarkets, EconiaTrade, ENVIRONMENT } from '@kanalabs/trade';
@@ -40,8 +39,8 @@ export default async function placeLimitBuyOrder(fastify: FastifyInstance) {
                 const registeredMarkets = await econia.fetchRegisteredMarkets(environment);
                 const marketData: EconiaMarkets = await econia.markets(
                     registeredMarkets.filter((market) => market.marketId == 3)[0],
-                  environment
-                  );
+                    environment
+                );
                 const buyOrderPayload = await marketData.placeLimitOrder(BUY, 1, 4);
                 const transaction = await client.generateTransaction(account.address(), buyOrderPayload);
                 const simulate = await client.simulateTransaction(account, transaction);
@@ -52,7 +51,7 @@ export default async function placeLimitBuyOrder(fastify: FastifyInstance) {
                 const openOrders = await marketData.getOpenOrders(account.address().toString(), 'open')
                 reply.code(200).send({
                     status: 200,
-                    message: 'Place Market Buy Order payload submitted successfully',
+                    message: 'Place Limit Buy Order payload submitted successfully',
                     buyOrderPayload,
                 });
             } catch (error: any) {
